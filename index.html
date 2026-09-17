@@ -91,6 +91,33 @@
             color: #fff; font-size: 14px; outline: none; margin-bottom: 10px;
         }
 
+        /* حاوية حقل كلمة المرور مع زر إظهار/إخفاء */
+        .password-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .password-container input {
+            margin-bottom: 0;
+            padding-left: 40px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 16px;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .toggle-password:hover {
+            opacity: 1;
+        }
+
         select option {
             background: #191b26;
             color: #fff;
@@ -177,10 +204,13 @@
             <!-- نموذج تسجيل الدخول -->
             <div id="login-form-container">
                 <h2>🎮 تسجيل الدخول</h2>
-                <input type="text" id="username" placeholder="اسم المستخدم / الجيميل / رقم الهاتف">
-                <input type="password" id="password" placeholder="كلمة المرور">
+                <input type="text" id="username" placeholder="اسم المستخدم أو البريد الإلكتروني (Gmail)">
+                <div class="password-container">
+                    <input type="password" id="password" placeholder="كلمة المرور">
+                    <span class="toggle-password" onclick="togglePasswordVisibility('password', this)">👁️</span>
+                </div>
                 <button class="btn btn-primary" onclick="login()">دخول</button>
-                <button class="btn-link" onclick="showAuthView('forgot')">نسيت كلمة المرور أو اسم المستخدم؟</button>
+                <button class="btn-link" onclick="showAuthView('forgot')">نسيت كلمة المرور؟</button>
                 <button class="btn btn-secondary" onclick="showAuthView('register')">إنشاء حساب جديد ➕</button>
                 <p id="login-error" style="color:var(--status-busy); margin-top:10px; display:none;">بيانات الدخول خاطئة!</p>
             </div>
@@ -188,22 +218,23 @@
             <!-- نموذج إنشاء مستخدم جديد -->
             <div id="register-form-container" style="display:none;">
                 <h2>👤 حساب جديد</h2>
-                <input type="text" id="new-username" placeholder="اسم المستخدم">
-                <input type="email" id="new-email" placeholder="البريد الإلكتروني (Gmail فقط)">
-                <input type="tel" id="new-phone" placeholder="رقم الهاتف المصري (11 رقم)">
-                <input type="password" id="new-password" placeholder="كلمة المرور">
-                <input type="password" id="new-confirm-password" placeholder="تأكيد كلمة المرور">
+                <input type="text" id="new-username" placeholder="الاسم">
+                <input type="email" id="new-email" placeholder="الإيميل (Gmail فقط)">
+                <div class="password-container">
+                    <input type="password" id="new-password" placeholder="كلمة السر">
+                    <span class="toggle-password" onclick="togglePasswordVisibility('new-password', this)">👁️</span>
+                </div>
                 <button class="btn btn-primary" onclick="registerNewUser()">حفظ وتسجيل الدخول</button>
                 <button class="btn btn-secondary" onclick="showAuthView('login')">العودة لتسجيل الدخول</button>
                 <p id="register-error" style="color:var(--status-busy); margin-top:10px; display:none;"></p>
             </div>
 
-            <!-- نموذج نسيت كلمة المرور / استعادة الحساب -->
+            <!-- نموذج نسيت كلمة المرور / استعادة الحساب عبر الجيميل -->
             <div id="forgot-form-container" style="display:none;">
                 <h2>🔑 استعادة الحساب</h2>
-                <p style="font-size:13px; color:var(--text-dim); margin-bottom:15px;">أدخل الجيميل أو رقم الهاتف المصري المسجل لطلب رمز التأكيد (OTP)</p>
-                <input type="text" id="forgot-identifier" placeholder="الجيميل أو رقم الهاتف المصري">
-                <button class="btn btn-primary" onclick="sendOTP()">إرسال رمز OTP 📩</button>
+                <p style="font-size:13px; color:var(--text-dim); margin-bottom:15px;">أدخل عنوان الجيميل المسجل لإرسال رمز الأمان (OTP)</p>
+                <input type="email" id="forgot-identifier" placeholder="أدخل الجيميل الخاص بك (@gmail.com)">
+                <button class="btn btn-primary" onclick="sendOTP()">إرسال الـ OTP على الجيميل 📩</button>
                 <button class="btn btn-secondary" onclick="showAuthView('login')">إلغاء والعودة</button>
                 <p id="forgot-error" style="color:var(--status-busy); margin-top:10px; display:none;"></p>
             </div>
@@ -211,10 +242,10 @@
             <!-- نموذج إدخال رمز الـ OTP -->
             <div id="otp-form-container" style="display:none;">
                 <h2>📩 تأكيد رمز الأمان</h2>
-                <p style="font-size:13px; color:var(--text-dim); margin-bottom:15px;">تم إرسال رمز OTP مكون من 6 أرقام إلى حسابك.</p>
+                <p style="font-size:13px; color:var(--text-dim); margin-bottom:15px;">تم إرسال رمز OTP مكون من 6 أرقام إلى الجيميل الخاص بك.</p>
                 <input type="text" id="otp-input" placeholder="أدخل رمز OTP هنا">
                 <button class="btn btn-primary" onclick="verifyOTP()">تأكيد الرمز</button>
-                <button class="btn btn-secondary" onclick="showAuthView('forgot')">تغيير البريد / الرقم</button>
+                <button class="btn btn-secondary" onclick="showAuthView('forgot')">تغيير الجيميل</button>
                 <p id="otp-error" style="color:var(--status-busy); margin-top:10px; display:none;"></p>
             </div>
 
@@ -222,9 +253,11 @@
             <div id="reset-password-container" style="display:none;">
                 <h2>✨ تعيين كلمة مرور جديدة</h2>
                 <p id="found-username-msg" style="color:var(--accent-blue); font-size:14px; margin-bottom:10px;"></p>
-                <input type="password" id="reset-new-password" placeholder="كلمة المرور الجديدة">
-                <input type="password" id="reset-confirm-password" placeholder="تأكيد كلمة المرور الجديدة">
-                <button class="btn btn-primary" onclick="saveNewPassword()">حفظ كلمة المرور الجديدة وتسجيل الدخول</button>
+                <div class="password-container">
+                    <input type="password" id="reset-new-password" placeholder="كلمة المرور الجديدة">
+                    <span class="toggle-password" onclick="togglePasswordVisibility('reset-new-password', this)">👁️</span>
+                </div>
+                <button class="btn btn-primary" onclick="saveNewPassword()">حفظ كلمة المرور وتسجيل الدخول</button>
                 <p id="reset-error" style="color:var(--status-busy); margin-top:10px; display:none;"></p>
             </div>
 
@@ -387,13 +420,25 @@
     <script>
         // 🔑 قائمة الحسابات الافتراضية
         let usersList = JSON.parse(localStorage.getItem('ps_users')) || [
-            { username: "admin", email: "admin@gmail.com", phone: "01000000000", password: "123" }
+            { username: "admin", email: "admin@gmail.com", password: "123" }
         ];
 
         let tempUserReset = null;
         let generatedOTP = null;
 
         let currentActiveDate = getTodayDate();
+
+        // التبديل بين إظهار وإخفاء كلمة المرور
+        function togglePasswordVisibility(inputId, iconEl) {
+            const input = document.getElementById(inputId);
+            if (input.type === "password") {
+                input.type = "text";
+                iconEl.textContent = "🙈";
+            } else {
+                input.type = "password";
+                iconEl.textContent = "👁️";
+            }
+        }
 
         function showToast(message, bgColor = "linear-gradient(to right, #00f0ff, #7000ff)") {
             Toastify({
@@ -467,9 +512,7 @@
                 // تفريغ حقول التسجيل لتظهر فورمة فاضية
                 document.getElementById('new-username').value = '';
                 document.getElementById('new-email').value = '';
-                document.getElementById('new-phone').value = '';
                 document.getElementById('new-password').value = '';
-                document.getElementById('new-confirm-password').value = '';
                 document.getElementById('register-form-container').style.display = 'block';
             } else if (viewName === 'forgot') {
                 document.getElementById('forgot-identifier').value = '';
@@ -479,7 +522,6 @@
                 document.getElementById('otp-form-container').style.display = 'block';
             } else if (viewName === 'reset') {
                 document.getElementById('reset-new-password').value = '';
-                document.getElementById('reset-confirm-password').value = '';
                 document.getElementById('reset-password-container').style.display = 'block';
             }
         }
@@ -490,53 +532,33 @@
             return gmailRegex.test(email);
         }
 
-        // التحقق من رقم الهاتف المصري (11 رقم يبدأ بـ 010, 011, 012, 015)
-        function isValidEgyptianPhone(phone) {
-            const egyptPhoneRegex = /^01[0125][0-9]{8}$/;
-            return egyptPhoneRegex.test(phone);
-        }
-
-        // إنشاء حساب جديد
+        // إنشاء حساب جديد (الاسم، الجيميل، كلمة السر)
         function registerNewUser() {
             const u = document.getElementById('new-username').value.trim();
             const email = document.getElementById('new-email').value.trim();
-            const phone = document.getElementById('new-phone').value.trim();
             const p = document.getElementById('new-password').value.trim();
-            const cp = document.getElementById('new-confirm-password').value.trim();
             const errEl = document.getElementById('register-error');
 
-            if (!u || !email || !phone || !p || !cp) {
+            if (!u || !email || !p) {
                 errEl.textContent = "الرجاء ملء جميع الحقول المطلوبة!";
                 errEl.style.display = 'block';
                 return;
             }
 
             if (!isValidGmail(email)) {
-                errEl.textContent = "يجب إدخال بريد إلكتروني حقيقي تنتهي بـ @gmail.com!";
+                errEl.textContent = "يجب إدخال بريد إلكتروني تنتهي بـ @gmail.com!";
                 errEl.style.display = 'block';
                 return;
             }
 
-            if (!isValidEgyptianPhone(phone)) {
-                errEl.textContent = "يرجى كتابة رقم هاتف مصري صحيح مكون من 11 رقم يبدأ بـ (010, 011, 012, 015)!";
-                errEl.style.display = 'block';
-                return;
-            }
-
-            if (p !== cp) {
-                errEl.textContent = "كلمة المرور وتأكيد كلمة المرور غير متطابقتين!";
-                errEl.style.display = 'block';
-                return;
-            }
-
-            const exists = usersList.some(user => user.username === u || user.email === email || user.phone === phone);
+            const exists = usersList.some(user => user.username === u || user.email === email);
             if (exists) {
-                errEl.textContent = "اسم المستخدم، الجيميل، أو رقم الهاتف مسجل بالفعل!";
+                errEl.textContent = "اسم المستخدم أو الجيميل مسجل بالفعل!";
                 errEl.style.display = 'block';
                 return;
             }
 
-            usersList.push({ username: u, email: email, phone: phone, password: p });
+            usersList.push({ username: u, email: email, password: p });
             saveData();
 
             enterApplication(u);
@@ -549,7 +571,7 @@
             const p = document.getElementById('password').value.trim();
             
             const foundUser = usersList.find(user => 
-                (user.username === identifier || user.email === identifier || user.phone === identifier) && user.password === p
+                (user.username === identifier || user.email === identifier) && user.password === p
             );
 
             if (foundUser) {
@@ -560,25 +582,31 @@
             }
         }
 
-        // إرسال الـ OTP رسمياً
+        // إرسال الـ OTP على الجيميل
         function sendOTP() {
-            const identifier = document.getElementById('forgot-identifier').value.trim();
+            const email = document.getElementById('forgot-identifier').value.trim();
             const errEl = document.getElementById('forgot-error');
 
-            const foundUser = usersList.find(u => u.email === identifier || u.phone === identifier);
+            if (!isValidGmail(email)) {
+                errEl.textContent = "يرجى كتابة عنوان Gmail صحيح ينتهي بـ @gmail.com!";
+                errEl.style.display = 'block';
+                return;
+            }
+
+            const foundUser = usersList.find(u => u.email === email);
 
             if (!foundUser) {
-                errEl.textContent = "لم نجد أي حساب مرتبط بهذا البريد الإلكتروني أو رقم الهاتف!";
+                errEl.textContent = "لم نجد أي حساب مرتبط بهذا الجيميل!";
                 errEl.style.display = 'block';
                 return;
             }
 
             tempUserReset = foundUser;
-            // توليد رمز OTP حقيقي مكون من 6 أرقام
+            // توليد رمز OTP مكون من 6 أرقام
             generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
 
             showAuthView('otp');
-            showToast(`تم إرسال رمز OTP المكون من 6 أرقام إلى حسابك بنجاح 📩`);
+            showToast(`تم إرسال رمز OTP مكون من 6 أرقام إلى الجيميل (${email}) بنجاح 📩`);
         }
 
         // تأكيد الـ OTP
@@ -596,20 +624,13 @@
             }
         }
 
-        // تعيين واستبدال كلمة المرور القديمة مباشرةً
+        // تعيين كلمة المرور الجديدة
         function saveNewPassword() {
             const np = document.getElementById('reset-new-password').value.trim();
-            const cp = document.getElementById('reset-confirm-password').value.trim();
             const errEl = document.getElementById('reset-error');
 
-            if (!np || !cp) {
-                errEl.textContent = "يرجى كتابة كلمة المرور وتأكيدها!";
-                errEl.style.display = 'block';
-                return;
-            }
-
-            if (np !== cp) {
-                errEl.textContent = "كلمتا المرور غير متطابقتين!";
+            if (!np) {
+                errEl.textContent = "يرجى كتابة كلمة المرور الجديدة!";
                 errEl.style.display = 'block';
                 return;
             }
