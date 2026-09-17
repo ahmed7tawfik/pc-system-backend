@@ -16,9 +16,9 @@ const app = express();
 app.use(express.json());
 app.use(cors({ origin: '*' }));
 app.use(express.static(path.join(__dirname)));
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
+//app.get('/', (req, res) => {
+//    res.sendFile(path.join(__dirname, 'index.html'));
+//});
 const MONGO_URI = process.env.MONGO_URI;
 const JWT_SECRET = process.env.JWT_SECRET || 'secret_key_123';
 
