@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
+const path = require('path');
 const User = require('./models/User');
 const Inventory = require('./models/Inventory');
 const DailyRecord = require('./models/DailyRecord');
@@ -13,7 +13,10 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({ origin: '*' }));
-
+app.use(express.static(path.join(__dirname)));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 const MONGO_URI = process.env.MONGO_URI;
 const JWT_SECRET = process.env.JWT_SECRET || 'secret_key_123';
 
