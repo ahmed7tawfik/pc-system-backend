@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PlayStation Lounge - Management System</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <!-- مكتبة الإشعارات Toastify CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     
     <style>
@@ -91,7 +90,6 @@
             color: #fff; font-size: 14px; outline: none; margin-bottom: 10px;
         }
 
-        /* حاوية حقل كلمة المرور مع زر إظهار/إخفاء */
         .password-container {
             position: relative;
             width: 100%;
@@ -197,11 +195,9 @@
 </head>
 <body>
 
-    <!-- 1️⃣ صفحة تسجيل الدخول وإدارة الحسابات -->
     <div id="login-page">
         <div class="login-card">
             
-            <!-- نموذج تسجيل الدخول -->
             <div id="login-form-container">
                 <h2>🎮 تسجيل الدخول</h2>
                 <input type="text" id="username" placeholder="اسم المستخدم أو البريد الإلكتروني (Gmail)">
@@ -215,7 +211,6 @@
                 <p id="login-error" style="color:var(--status-busy); margin-top:10px; display:none;">بيانات الدخول خاطئة!</p>
             </div>
 
-            <!-- نموذج إنشاء مستخدم جديد -->
             <div id="register-form-container" style="display:none;">
                 <h2>👤 حساب جديد</h2>
                 <input type="text" id="new-username" placeholder="الاسم">
@@ -229,7 +224,6 @@
                 <p id="register-error" style="color:var(--status-busy); margin-top:10px; display:none;"></p>
             </div>
 
-            <!-- نموذج نسيت كلمة المرور / استعادة الحساب عبر الجيميل -->
             <div id="forgot-form-container" style="display:none;">
                 <h2>🔑 استعادة الحساب</h2>
                 <p style="font-size:13px; color:var(--text-dim); margin-bottom:15px;">أدخل عنوان الجيميل المسجل لإرسال رمز الأمان (OTP)</p>
@@ -239,17 +233,15 @@
                 <p id="forgot-error" style="color:var(--status-busy); margin-top:10px; display:none;"></p>
             </div>
 
-            <!-- نموذج إدخال رمز الـ OTP -->
             <div id="otp-form-container" style="display:none;">
                 <h2>📩 تأكيد رمز الأمان</h2>
-                <p style="font-size:13px; color:var(--text-dim); margin-bottom:15px;">تم إرسال رمز OTP مكون من 6 أرقام إلى الجيميل الخاص بك.</p>
+                <p style="font-size:13px; color:var(--text-dim); margin-bottom:15px;">تم إرسال رمز OTP مكون من 6 أرقام إلى البريد الإلكتروني.</p>
                 <input type="text" id="otp-input" placeholder="أدخل رمز OTP هنا">
                 <button class="btn btn-primary" onclick="verifyOTP()">تأكيد الرمز</button>
                 <button class="btn btn-secondary" onclick="showAuthView('forgot')">تغيير الجيميل</button>
                 <p id="otp-error" style="color:var(--status-busy); margin-top:10px; display:none;"></p>
             </div>
 
-            <!-- نموذج تعيين كلمة مرور جديدة -->
             <div id="reset-password-container" style="display:none;">
                 <h2>✨ تعيين كلمة مرور جديدة</h2>
                 <p id="found-username-msg" style="color:var(--accent-blue); font-size:14px; margin-bottom:10px;"></p>
@@ -264,7 +256,6 @@
         </div>
     </div>
 
-    <!-- 2️⃣ التطبيق الرئيسي -->
     <div id="app">
         <nav>
             <div style="font-weight:900; color:var(--accent-blue);">PLAYSTATION LOUNGE</div>
@@ -277,10 +268,8 @@
         </nav>
 
         <main>
-            <!-- صفحة الأجهزة -->
             <div id="devices-page" class="page-section active">
                 <div class="grid">
-                    <!-- جهاز 1 -->
                     <div class="card" id="device-1">
                         <h3>جهاز 1</h3>
                         <select id="mode-1" onchange="updateDefaultPrice(1)">
@@ -298,7 +287,6 @@
                         <button class="btn btn-primary" id="btn-1" onclick="handleDeviceAction(1)">▶️ بدء التشغيل</button>
                     </div>
 
-                    <!-- جهاز 2 -->
                     <div class="card" id="device-2">
                         <h3>جهاز 2</h3>
                         <select id="mode-2" onchange="updateDefaultPrice(2)">
@@ -316,7 +304,6 @@
                         <button class="btn btn-primary" id="btn-2" onclick="handleDeviceAction(2)">▶️ بدء التشغيل</button>
                     </div>
 
-                    <!-- جهاز 3 -->
                     <div class="card" id="device-3">
                         <h3>جهاز 3</h3>
                         <select id="mode-3" onchange="updateDefaultPrice(3)">
@@ -336,7 +323,6 @@
                 </div>
             </div>
 
-            <!-- صفحة المشروبات -->
             <div id="drinks-page" class="page-section">
                 <h2>🥤 قائمة المشروبات والمأكولات</h2>
                 <div style="display:flex; gap:10px; margin: 20px 0;">
@@ -359,7 +345,6 @@
                 </table>
             </div>
 
-            <!-- صفحة الجرد والأرباح -->
             <div id="inventory-page" class="page-section">
                 <h2>📦 تقرير الجرد العام</h2>
 
@@ -379,7 +364,7 @@
                     </div>
                 </div>
 
-                <h3 class="stats-title">🗓️ سجل الشهور المجمع (اضغط على الشهر لتفاصيل )</h3>
+                <h3 class="stats-title">🗓️ سجل الشهور المجمع</h3>
                 <table>
                     <thead>
                         <tr>
@@ -392,43 +377,16 @@
                     <tbody id="monthly-summary-table">
                     </tbody>
                 </table>
-
-                <div id="daily-details-section" style="display:none; margin-top: 30px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                        <h3 class="stats-title" id="selected-month-title" style="margin:0;">📅 تفاصيل أيام الشهر</h3>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>التاريخ (اليوم)</th>
-                                <th>دخل الأجهزة</th>
-                                <th>دخل المشروبات</th>
-                                <th>صافي الربح اليومي</th>
-                            </tr>
-                        </thead>
-                        <tbody id="daily-log-table">
-                        </tbody>
-                    </table>
-                </div>
             </div>
         </main>
     </div>
 
-    <!-- مكتبة الإشعارات Toastify JS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
     <script>
-        // 🔑 قائمة الحسابات الافتراضية
-        let usersList = JSON.parse(localStorage.getItem('ps_users')) || [
-            { username: "admin", email: "admin@gmail.com", password: "123" }
-        ];
+        let currentResetEmail = '';
+        let verifiedOTP = '';
 
-        let tempUserReset = null;
-        let generatedOTP = null;
-
-        let currentActiveDate = getTodayDate();
-
-        // التبديل بين إظهار وإخفاء كلمة المرور
         function togglePasswordVisibility(inputId, iconEl) {
             const input = document.getElementById(inputId);
             if (input.type === "password") {
@@ -446,220 +404,166 @@
                 duration: 3500,
                 gravity: "bottom",
                 position: "left",
-                stopOnFocus: true,
-                style: {
-                    background: bgColor,
-                    color: "#ffffff",
-                    borderRadius: "10px",
-                    fontSize: "15px",
-                    fontWeight: "bold",
-                    boxShadow: "0 4px 15px rgba(0,0,0,0.5)"
-                }
+                style: { background: bgColor, color: "#fff", borderRadius: "10px", fontWeight: "bold" }
             }).showToast();
         }
 
-        function getTodayDate() {
-            return new Date().toISOString().split('T')[0];
-        }
-
-        let inventory = JSON.parse(localStorage.getItem('ps_inventory')) || [
-            { id: 1, name: "بيبسي / كولا", price: 15, stock: 24 },
-            { id: 2, name: "قهوة / شاي", price: 10, stock: 50 },
-            { id: 3, name: "اندومي", price: 20, stock: 15 }
-        ];
-
-        let dailyRecords = JSON.parse(localStorage.getItem('ps_daily_records')) || {};
-        let activeMonthFilter = null;
-
-        function checkMidnightReset() {
-            const today = getTodayDate();
-            if (today !== currentActiveDate) {
-                currentActiveDate = today;
-                getTodayRecord();
-                updateStats();
-            }
-        }
-
-        setInterval(checkMidnightReset, 1000);
-
-        function getTodayRecord() {
-            const today = getTodayDate();
-            if (!dailyRecords[today]) {
-                dailyRecords[today] = { devices: 0, drinks: 0 };
-            }
-            return dailyRecords[today];
-        }
-
-        function saveData() {
-            localStorage.setItem('ps_inventory', JSON.stringify(inventory));
-            localStorage.setItem('ps_daily_records', JSON.stringify(dailyRecords));
-            localStorage.setItem('ps_users', JSON.stringify(usersList));
-        }
-
-        // التبديل بين الواجهات وتفريغ الحقول
         function showAuthView(viewName) {
-            const views = ['login', 'register', 'forgot', 'otp', 'reset-password'];
-            views.forEach(v => {
+            ['login', 'register', 'forgot', 'otp', 'reset'].forEach(v => {
                 const el = document.getElementById(`${v}-form-container`) || document.getElementById(`${v}-container`);
                 if (el) el.style.display = 'none';
             });
 
             document.querySelectorAll('#login-page p[id$="-error"]').forEach(p => p.style.display = 'none');
 
-            if (viewName === 'login') {
-                document.getElementById('login-form-container').style.display = 'block';
-            } else if (viewName === 'register') {
-                // تفريغ حقول التسجيل لتظهر فورمة فاضية
-                document.getElementById('new-username').value = '';
-                document.getElementById('new-email').value = '';
-                document.getElementById('new-password').value = '';
-                document.getElementById('register-form-container').style.display = 'block';
-            } else if (viewName === 'forgot') {
-                document.getElementById('forgot-identifier').value = '';
-                document.getElementById('forgot-form-container').style.display = 'block';
-            } else if (viewName === 'otp') {
-                document.getElementById('otp-input').value = '';
-                document.getElementById('otp-form-container').style.display = 'block';
-            } else if (viewName === 'reset') {
-                document.getElementById('reset-new-password').value = '';
-                document.getElementById('reset-password-container').style.display = 'block';
-            }
+            if (viewName === 'login') document.getElementById('login-form-container').style.display = 'block';
+            if (viewName === 'register') document.getElementById('register-form-container').style.display = 'block';
+            if (viewName === 'forgot') document.getElementById('forgot-form-container').style.display = 'block';
+            if (viewName === 'otp') document.getElementById('otp-form-container').style.display = 'block';
+            if (viewName === 'reset') document.getElementById('reset-password-container').style.display = 'block';
         }
 
-        // التحقق من البريد الإلكتروني الحقيقي (Gmail)
-        function isValidGmail(email) {
-            const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
-            return gmailRegex.test(email);
-        }
-
-        // إنشاء حساب جديد (الاسم، الجيميل، كلمة السر)
-        function registerNewUser() {
-            const u = document.getElementById('new-username').value.trim();
+        async function registerNewUser() {
+            const username = document.getElementById('new-username').value.trim();
             const email = document.getElementById('new-email').value.trim();
-            const p = document.getElementById('new-password').value.trim();
+            const password = document.getElementById('new-password').value.trim();
             const errEl = document.getElementById('register-error');
 
-            if (!u || !email || !p) {
-                errEl.textContent = "الرجاء ملء جميع الحقول المطلوبة!";
+            try {
+                const res = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, password })
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                    showToast(`تم إنشاء الحساب بنجاح! 👋`);
+                    enterApplication(data.username);
+                } else {
+                    errEl.textContent = data.message || "فشل التسجيل";
+                    errEl.style.display = 'block';
+                }
+            } catch (err) {
+                errEl.textContent = "تعذر الاتصال بالسيرفر";
                 errEl.style.display = 'block';
-                return;
             }
-
-            if (!isValidGmail(email)) {
-                errEl.textContent = "يجب إدخال بريد إلكتروني تنتهي بـ @gmail.com!";
-                errEl.style.display = 'block';
-                return;
-            }
-
-            const exists = usersList.some(user => user.username === u || user.email === email);
-            if (exists) {
-                errEl.textContent = "اسم المستخدم أو الجيميل مسجل بالفعل!";
-                errEl.style.display = 'block';
-                return;
-            }
-
-            usersList.push({ username: u, email: email, password: p });
-            saveData();
-
-            enterApplication(u);
-            showToast(`تم إنشاء الحساب بنجاح! مرحبًا بك ${u} 🎉`);
         }
 
-        // تسجيل الدخول
-        function login() {
+        async function login() {
             const identifier = document.getElementById('username').value.trim();
-            const p = document.getElementById('password').value.trim();
-            
-            const foundUser = usersList.find(user => 
-                (user.username === identifier || user.email === identifier) && user.password === p
-            );
+            const password = document.getElementById('password').value.trim();
+            const errEl = document.getElementById('login-error');
 
-            if (foundUser) {
-                enterApplication(foundUser.username);
-                showToast(`أهلاً بك ${foundUser.username} 👋`);
-            } else {
-                document.getElementById('login-error').style.display = 'block';
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ identifier, password })
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                    showToast(`أهلاً بك ${data.username} 👋`);
+                    enterApplication(data.username);
+                } else {
+                    errEl.textContent = data.message || "بيانات الدخول خاطئة!";
+                    errEl.style.display = 'block';
+                }
+            } catch (err) {
+                errEl.textContent = "تعذر الاتصال بالسيرفر";
+                errEl.style.display = 'block';
             }
         }
 
-        // إرسال الـ OTP على الجيميل
-        function sendOTP() {
-            const email = document.getElementById('forgot-identifier').value.trim();
+        // إرسال طلب الـ OTP إلى الباك إند
+        async function sendOTP() {
+            const identifier = document.getElementById('forgot-identifier').value.trim();
             const errEl = document.getElementById('forgot-error');
 
-            if (!isValidGmail(email)) {
-                errEl.textContent = "يرجى كتابة عنوان Gmail صحيح ينتهي بـ @gmail.com!";
+            if (!identifier) {
+                errEl.textContent = "يرجى كتابة البريد الإلكتروني الخاص بك!";
                 errEl.style.display = 'block';
                 return;
             }
 
-            const foundUser = usersList.find(u => u.email === email);
+            try {
+                showToast("جاري إرسال الإيميل... ⏳");
+                const res = await fetch('/api/auth/send-otp', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ identifier })
+                });
 
-            if (!foundUser) {
-                errEl.textContent = "لم نجد أي حساب مرتبط بهذا الجيميل!";
+                const data = await res.json();
+                if (res.ok) {
+                    currentResetEmail = identifier;
+                    showAuthView('otp');
+                    showToast("تم إرسال رمز OTP الفعلي إلى إيميلك بنجاح 📩");
+                } else {
+                    errEl.textContent = data.message || "حدث خطأ أثناء الإرسال";
+                    errEl.style.display = 'block';
+                }
+            } catch (err) {
+                errEl.textContent = "تعذر الاتصال بالسيرفر";
                 errEl.style.display = 'block';
-                return;
             }
-
-            tempUserReset = foundUser;
-            // توليد رمز OTP مكون من 6 أرقام
-            generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-
-            showAuthView('otp');
-            showToast(`تم إرسال رمز OTP مكون من 6 أرقام إلى الجيميل (${email}) بنجاح 📩`);
         }
 
-        // تأكيد الـ OTP
         function verifyOTP() {
             const inputOTP = document.getElementById('otp-input').value.trim();
             const errEl = document.getElementById('otp-error');
 
-            if (inputOTP === generatedOTP) {
-                showAuthView('reset');
-                document.getElementById('found-username-msg').textContent = `تغيير كلمة المرور للحساب: (${tempUserReset.username})`;
-                showToast("تم التحقق من الرمز بنجاح ✅");
-            } else {
-                errEl.textContent = "رمز OTP غير صحيح، يرجى إعادة المحاولة!";
-                errEl.style.display = 'block';
-            }
-        }
-
-        // تعيين كلمة المرور الجديدة
-        function saveNewPassword() {
-            const np = document.getElementById('reset-new-password').value.trim();
-            const errEl = document.getElementById('reset-error');
-
-            if (!np) {
-                errEl.textContent = "يرجى كتابة كلمة المرور الجديدة!";
+            if (!inputOTP) {
+                errEl.textContent = "يرجى إدخال الرمز المكون من 6 أرقام";
                 errEl.style.display = 'block';
                 return;
             }
 
-            // استبدال كلمة المرور القديمة بكلمة المرور الجديدة
-            tempUserReset.password = np;
-            saveData();
+            verifiedOTP = inputOTP;
+            showAuthView('reset');
+            showToast("تم إدخال الرمز، يرجى كتابة كلمة المرور الجديدة ✅");
+        }
 
-            const loggedUsername = tempUserReset.username;
-            tempUserReset = null;
-            generatedOTP = null;
+        // تأكيد تغيير كلمة المرور والتحقق النهائي عبر الباك إند
+        async function saveNewPassword() {
+            const newPassword = document.getElementById('reset-new-password').value.trim();
+            const errEl = document.getElementById('reset-error');
 
-            enterApplication(loggedUsername);
-            showToast("تم تعيين كلمة المرور الجديدة وتسجيل الدخول مباشرة! 🎉");
+            try {
+                const res = await fetch('/api/auth/reset-password', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        identifier: currentResetEmail, 
+                        otp: verifiedOTP, 
+                        newPassword 
+                    })
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                    showToast("تم تغيير كلمة المرور بنجاح! يمكنك الآن تسجيل الدخول 🎉");
+                    showAuthView('login');
+                } else {
+                    errEl.textContent = data.message || "فشلت العملية";
+                    errEl.style.display = 'block';
+                }
+            } catch (err) {
+                errEl.textContent = "تعذر الاتصال بالسيرفر";
+                errEl.style.display = 'block';
+            }
         }
 
         function enterApplication(username) {
             document.getElementById('login-page').style.display = 'none';
             document.getElementById('app').style.display = 'block';
-            renderDrinks();
-            updateStats();
         }
 
         function logout() {
             document.getElementById('app').style.display = 'none';
             document.getElementById('login-page').style.display = 'flex';
             showAuthView('login');
-            document.getElementById('username').value = '';
-            document.getElementById('password').value = '';
         }
 
         function showPage(pageId, btn) {
@@ -667,246 +571,6 @@
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             btn.classList.add('active');
-        }
-
-        function renderDrinks() {
-            const tbody = document.getElementById('drinks-table-body');
-            tbody.innerHTML = '';
-            inventory.forEach((item, index) => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${item.name}</td>
-                        <td>${item.price} ج.م</td>
-                        <td>${item.stock} قطعة</td>
-                        <td>
-                            <div class="action-cell">
-                                <button class="btn btn-primary" style="padding:6px 14px; width:auto;" onclick="sellDrink(${item.id})">بيع / تقديم 🥤</button>
-                                <button class="btn-delete" title="حذف المنتج" onclick="deleteDrink(${index})">✖</button>
-                            </div>
-                        </td>
-                    </tr>
-                `;
-            });
-            saveData();
-        }
-
-        function addDrink() {
-            const name = document.getElementById('drink-name').value;
-            const price = parseFloat(document.getElementById('drink-price').value);
-            const stock = parseInt(document.getElementById('drink-stock').value);
-
-            if(name && price && stock) {
-                inventory.push({ id: Date.now(), name, price, stock });
-                renderDrinks();
-                showToast(`تمت إضافة "${name}" إلى القائمة بنجاح ✨`);
-                document.getElementById('drink-name').value = '';
-                document.getElementById('drink-price').value = '';
-                document.getElementById('drink-stock').value = '';
-            }
-        }
-
-        function deleteDrink(index) {
-            const deletedName = inventory[index].name;
-            inventory.splice(index, 1);
-            renderDrinks();
-            showToast(`تم حذف "${deletedName}" من القائمة!`, "linear-gradient(to right, #ff0055, #7000ff)");
-        }
-
-        function sellDrink(id) {
-            const item = inventory.find(i => i.id === id);
-            if(item && item.stock > 0) {
-                item.stock--;
-                const rec = getTodayRecord();
-                rec.drinks += item.price;
-                renderDrinks();
-                updateStats();
-                showToast(`تم تقديم "${item.name}" وخصمه من المخزن 🥤`);
-            } else {
-                showToast(`عذراً، المنتج "${item.name}" نفذ من المخزن!`, "linear-gradient(to right, #ff0055, #ff5500)");
-            }
-        }
-
-        function updateStats() {
-            const todayRec = getTodayRecord();
-
-            const netToday = todayRec.devices + todayRec.drinks;
-            document.getElementById('stat-devices-today').textContent = todayRec.devices.toFixed(2) + ' ج.م';
-            document.getElementById('stat-drinks-today').textContent = todayRec.drinks.toFixed(2) + ' ج.م';
-            document.getElementById('stat-net-today').textContent = netToday.toFixed(2) + ' ج.م';
-
-            const monthlyData = {};
-
-            Object.keys(dailyRecords).forEach(date => {
-                const monthKey = date.substring(0, 7);
-                if (!monthlyData[monthKey]) {
-                    monthlyData[monthKey] = { devices: 0, drinks: 0 };
-                }
-                monthlyData[monthKey].devices += dailyRecords[date].devices;
-                monthlyData[monthKey].drinks += dailyRecords[date].drinks;
-            });
-
-            const monthTbody = document.getElementById('monthly-summary-table');
-            monthTbody.innerHTML = '';
-
-            const sortedMonths = Object.keys(monthlyData).sort().reverse();
-
-            sortedMonths.forEach(month => {
-                const m = monthlyData[month];
-                const netMonth = m.devices + m.drinks;
-
-                monthTbody.innerHTML += `
-                    <tr class="clickable-row" onclick="showDailyDetails('${month}')">
-                        <td><strong>${month} 📂</strong></td>
-                        <td>${m.devices.toFixed(2)} ج.م</td>
-                        <td>${m.drinks.toFixed(2)} ج.م</td>
-                        <td style="color:var(--status-free); font-weight:bold;">
-                            ${netMonth.toFixed(2)} ج.م
-                        </td>
-                    </tr>
-                `;
-            });
-
-            if (activeMonthFilter) {
-                showDailyDetails(activeMonthFilter);
-            } else if (sortedMonths.length > 0) {
-                showDailyDetails(sortedMonths[0]);
-            }
-
-            saveData();
-        }
-
-        function showDailyDetails(monthKey) {
-            activeMonthFilter = monthKey;
-            document.getElementById('daily-details-section').style.display = 'block';
-            document.getElementById('selected-month-title').textContent = `📅 تفاصيل أيام شهر (${monthKey})`;
-
-            const logTbody = document.getElementById('daily-log-table');
-            logTbody.innerHTML = '';
-
-            const monthDays = Object.keys(dailyRecords)
-                .filter(date => date.startsWith(monthKey))
-                .sort()
-                .reverse();
-
-            monthDays.forEach(date => {
-                const rec = dailyRecords[date];
-                const netDay = rec.devices + rec.drinks;
-
-                logTbody.innerHTML += `
-                    <tr>
-                        <td>${date}</td>
-                        <td>${rec.devices.toFixed(2)} ج.م</td>
-                        <td>${rec.drinks.toFixed(2)} ج.م</td>
-                        <td style="color:var(--status-free); font-weight:bold;">
-                            ${netDay.toFixed(2)} ج.م
-                        </td>
-                    </tr>
-                `;
-            });
-        }
-
-        const devices = {};
-
-        function updateDefaultPrice(id) {
-            const select = document.getElementById(`mode-${id}`);
-            const priceInput = document.getElementById(`price-${id}`);
-            const selectedOption = select.options[select.selectedIndex];
-            const defaultPrice = selectedOption.getAttribute('data-price');
-            if (defaultPrice) {
-                priceInput.value = defaultPrice;
-            }
-        }
-
-        function handleDeviceAction(id) {
-            if (devices[id] && devices[id].isBusy) {
-                stopDevice(id, false);
-            } else {
-                startDevice(id);
-            }
-        }
-
-        function startDevice(id) {
-            const card = document.getElementById(`device-${id}`);
-            const btn = document.getElementById(`btn-${id}`);
-            const select = document.getElementById(`mode-${id}`);
-            const priceInput = document.getElementById(`price-${id}`);
-            const timerEl = card.querySelector('.timer-display');
-
-            const mode = select.value;
-            const price = parseFloat(priceInput.value) || 0;
-
-            card.classList.add('is-busy');
-            btn.textContent = '⏹️ إنهاء وتصفية الحساب';
-            btn.className = 'btn btn-danger';
-
-            showToast(`تم بدء تشغيل جهاز ${id} 🎮`);
-
-            if (mode === 'open') {
-                let seconds = 0;
-                const interval = setInterval(() => {
-                    seconds++;
-                    const hrs = String(Math.floor(seconds / 3600)).padStart(2, '0');
-                    const mins = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
-                    const secs = String(seconds % 60).padStart(2, '0');
-                    timerEl.textContent = `${hrs}:${mins}:${secs}`;
-                }, 1000);
-
-                devices[id] = { isBusy: true, interval, type: 'open', pricePerHour: price, getSeconds: () => seconds };
-            } else {
-                let minutes = mode === 'match' ? 15 : parseInt(mode);
-                let remainingSeconds = minutes * 60;
-
-                const interval = setInterval(() => {
-                    remainingSeconds--;
-                    if (remainingSeconds <= 0) {
-                        clearInterval(interval);
-                        timerEl.textContent = "00:00:00";
-                        showToast(`انتهى الوقت المحدد لجهاز ${id}! ⏰`, "linear-gradient(to right, #ff0055, #ff5500)");
-                        stopDevice(id, true);
-                    } else {
-                        const hrs = String(Math.floor(remainingSeconds / 3600)).padStart(2, '0');
-                        const mins = String(Math.floor((remainingSeconds % 3600) / 60)).padStart(2, '0');
-                        const secs = String(remainingSeconds % 60).padStart(2, '0');
-                        timerEl.textContent = `${hrs}:${mins}:${secs}`;
-                    }
-                }, 1000);
-
-                devices[id] = { isBusy: true, interval, type: 'fixed', fixedPrice: price };
-            }
-        }
-
-        function stopDevice(id, autoFinished = false) {
-            const device = devices[id];
-            if (!device || !device.isBusy) return;
-
-            clearInterval(device.interval);
-
-            let totalPrice = 0;
-            if (device.type === 'open') {
-                const totalHours = device.getSeconds() / 3600;
-                totalPrice = totalHours * device.pricePerHour;
-            } else {
-                totalPrice = device.fixedPrice;
-            }
-
-            const rec = getTodayRecord();
-            rec.devices += totalPrice;
-            updateStats();
-
-            const card = document.getElementById(`device-${id}`);
-            const btn = document.getElementById(`btn-${id}`);
-            const timerEl = card.querySelector('.timer-display');
-
-            card.classList.remove('is-busy');
-            btn.textContent = '▶️ بدء التشغيل';
-            btn.className = 'btn btn-primary';
-            timerEl.textContent = '00:00:00';
-
-            devices[id] = { isBusy: false };
-
-            if (!autoFinished) {
-                showToast(`تم إنهاء جلسة جهاز ${id} - المطلوب: ${totalPrice.toFixed(2)} ج.م 💰`);
-            }
         }
     </script>
 </body>
